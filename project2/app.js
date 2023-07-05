@@ -26,7 +26,7 @@ function calculateCost(){
     for(var i=0; i < menuItem.length; i++){
         if(menuItem[i].checked){
             totalCost += parseInt(menuItem[i].value);
-            menuItem[i].parentNode.style.backgroundColor = 'yellow';
+            menuItem[i].parentNode.style.backgroundColor = 'blue';
             menuItem[i].parentNode.style.color = 'white';
         } else {
             menuItem[i].parentNode.style.backgroundColor = 'white';

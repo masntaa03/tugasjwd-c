@@ -36,7 +36,7 @@ body {
 }
 
 .container input[type="submit"] {
-    background-color: #189fed;
+    background-color: #0000ee;
     color: #fff;
     padding: 12px 20px;
     border: 0;
@@ -47,7 +47,7 @@ body {
 } 
 
 .container input[type="submit"]:hover {
-    background-color: #1782bf;
+    background-color: #1818c9;
 }
 
 .alert {
@@ -99,4 +99,14 @@ body {
     padding: 10px;
 }
 
-
+.btn-primary [type="button"] {
+    background-color: #0000ee;
+    color: #fff;
+    padding: 7px 5px;
+    border: 0;
+    border-radius: 1px;
+    font-size: 16px;
+    font-variant: small-caps;
+    width: 20%;
+    cursor: pointer;
+} 
