@@ -1,0 +1,15 @@
+.media {
+    color: #000000;
+    background: url("../image/bg.png");
+}
+.media .img{
+    border: 1px solid #cccccc;
+}
+
+/* Good */
+.list-dataset{}
+
+/* Bad*/
+.listDataset{}
+.listdataset{}
+.list_dataset{}
