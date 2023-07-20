@@ -1,0 +1,29 @@
+.container-form {
+  margin: 10px;
+}
+
+.container-box {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.inputno {
+  width: 100px;
+}
+
+.inputnama {
+  width: 200px;
+}
+
+.inputwarna {
+  width: 300px;
+}
+
+.inputjumlah {
+  width: 85px;
+}
+
+label {
+  display: inline-flex;
+  width: 85px;
+}
