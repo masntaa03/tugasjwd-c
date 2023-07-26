@@ -1,58 +1,51 @@
 <?php
-include "helper/koneksi.php";
-if (isset($_POST['submit'])) {
+session_start();
+include_once 'koneksi.php';
+if (isset($_POST['nama'])) {
   $nama = mysqli_real_escape_string($conn, $_POST['nama']);
   $alamat = mysqli_real_escape_string($conn, $_POST['alamat']);
-  $jenis_kelamin = mysqli_real_escape_string($conn, $_POST['jenis_kelamin']);
+  $gender = mysqli_real_escape_string($conn, $_POST['kelamin']);
   $agama = mysqli_real_escape_string($conn, $_POST['agama']);
-  $sekolah_asal = mysqli_real_escape_string($conn, $_POST['sekolah_asal']);
+  $asal = mysqli_real_escape_string($conn, $_POST['asal']);
 
-  $sql = "INSERT INTO pendaftaran(nama, alamat, jenis_kelamin, agama, sekolah_asal) VALUES ('$nama', '$alamat', '$jenis_kelamin', '$agama', '$sekolah_asal')";
-  $hasil = mysqli_query($conn, $sql) or die(mysqli_error($conn));
-
+  $query_insert = "INSERT INTO siswa(nama,alamat,kelamin,agama,sekolah_asal) values ('" . $nama . "','" . $alamat . "','" . $gender . "','" . $agama . "','" . $asal . "')";
+  //$hasil=$conn->query($query_insert);
+  $hasil = mysqli_query($conn, $query_insert);
   if ($hasil) {
+    $_SESSION['status'] = 'berhasil';
     header("location:index.php?status=sukses");
   } else {
-    header('location = index.php?status=gagal');
+    $_SESSION['status'] = 'gagal';
+    header("location:index.php?status=gagal");
   }
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pendaftaran Siswa</title>
-</head>
+<div style="border:2px solid #6c757d; padding:5px">
+  <form action="form_daftar.php" method="post">
+    <label for="nama">Nama </label>
+    <input type="text" placeholder="nama lengkap" name="nama"><br>
 
-<body>
-  <h2>Formulir Pendaftaran Siswa Baru</h2>
-  <div style="border: 2px solid #000; padding: 5px;">
+    <label for="alamat">Alamat</label>
+    <textarea name="alamat" rows="4" cols="50"></textarea><br>
 
-    <form action="form_daftar.php" method="post">
-      <label for="nama">Nama :</label>
-      <input type="text" name="nama" placeholder="nama lengkap"><br><br>
-      <label for="alamat">Alamat :</label>
-      <textarea name="alamat" cols="30" rows="4"></textarea><br><br>
-      <label for="gender">Jenis Kelamin :</label>
-      <input type="radio" name="jenis_kelamin" value="L"> Laki - Laki
-      <input type="radio" name="jenis_kelamin" value="P"> Perempuan
-      <br><br>
-      <label for="agama">Agama :</label>
-      <select name="agama">
-        <option value="Islam">Islam</option>
-        <option value="Kristen">Kristen</option>
-        <option value="Hindu">Hindu</option>
-        <option value="Buddha">Buddha</option>
-        <option value="Protestan">Protestan</option>
-      </select><br><br>
-      <label for="asal">Asal Sekolah :</label>
-      <input type="text" name="sekolah_asal" placeholder="nama sekolah"><br><br>
-      <input type="submit" name="submit" value="Daftar">
-    </form>
-  </div>
-</body>
+    <label for="gender">Jenis Kelamin</label>
+    <input type="radio" name="kelamin" value="Laki-Laki"> Laki-Laki
+    <input type="radio" name="kelamin" value="Perempuan"> Perempuan<br>
 
-</html>
+    <label for="agama">Agama</label>
+    <select name="agama">
+      <option value="islam">Islam</option>
+      <option value="kristen">Kristen</option>
+      <option value="Hindu">Hindu</option>
+      <option value="Budha">Budha</option>
+      <option value="Protestan">Protestan</option>
+    </select><br>
+
+    <label for="asal">Asal Sekolah</label>
+    <input type="text" name="asal" placeholder="nama sekolah"> <br>
+
+    <input type="submit" value="Daftar">
+  </form>
+</div>

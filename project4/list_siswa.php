@@ -1,52 +1,71 @@
 <?php
-include "helper/koneksi.php";
+include_once "koneksi.php";
+$query = "SELECT * FROM siswa";
+$result = mysqli_query($conn, $query);
+$jumlah_siswa = mysqli_num_rows($result);
+if ($result) {
+  $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
+} else {
+  echo "Error executing the query: " . mysqli_error($connection);
+}
 ?>
-
-<!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>List Siswa</title>
+  <title>Document</title>
 </head>
 
 <body>
-  <h2>Siswa yang sudah mendaftar</h2>
-  <a href="form_daftar.php">[+] Tambah Data</a><br><br>
-  <table border="2">
-    <tr>
-      <th>No</th>
-      <th>Nama</th>
-      <th>Alamat</th>
-      <th>Jenis Kelamin</th>
-      <th>Agama</th>
-      <th>Sekolah Asal</th>
-    </tr>
-    <?php
-    $query = "select * from pendaftaran";
-    $list = mysqli_query($conn, $query);
-    $jumlah_siswa = mysqli_num_rows($list);
-
-    if (!$list) {
-      die("Gagal terhubung ke database " . mysqli_errno($conn) . " " . mysqli_error($conn));
-    }
-
-    while ($data = mysqli_fetch_assoc($list)) {
-    ?>
-      <tr>
-        <td><?= htmlspecialchars($data['no_daftar']); ?></td>
-        <td><?= $data['nama']; ?></td>
-        <td><?= htmlspecialchars($data['alamat']); ?></td>
-        <td><?= htmlspecialchars($data['jenis_kelamin']); ?></td>
-        <td><?= htmlspecialchars($data['agama']); ?></td>
-        <td><?= htmlspecialchars($data['sekolah_asal']); ?></td>
-      </tr>
-    <?php } ?>
-  </table>
-  <p>Total :
-    <?= $jumlah_siswa ?>
-  </p>
+  <div class="container">
+    <div>
+      <div>
+        <h3>Siswa Yang Sudah Mendaftar</h3>
+      </div>
+      <div>
+        <a href="form_daftar.php">[+] Tambah Baru</a>
+      </div>
+      <br>
+      <table border=2px>
+        <tr>
+          <td><b>No</b></td>
+          <td><b>Nama</b></td>
+          <td><b>Alamat</b></td>
+          <td><b>Jenis Kelamin</b></td>
+          <td><b>Agama</b></td>
+          <td><b>Sekolah Asal</b></td>
+        </tr>
+        <?php foreach ($rows as $row): ?>
+          <tr>
+            <td>
+              <?= htmlspecialchars($row['no']); ?>
+            </td>
+            <td>
+              <?= htmlspecialchars($row['nama']); ?>
+            </td>
+            <td>
+              <?= htmlspecialchars($row['alamat']); ?>
+            </td>
+            <td>
+              <?= htmlspecialchars($row["kelamin"]); ?>
+            </td>
+            <td>
+              <?= htmlspecialchars($row['agama']); ?>
+            </td>
+            <td>
+              <?= htmlspecialchars($row['sekolah_asal']); ?>
+            </td>
+          </tr>
+        <?php endforeach; ?>
+      </table>
+    </div>
+    <div>
+      <p>Total:
+        <?= $jumlah_siswa; ?>
+      </p>
+    </div>
+  </div>
 </body>
 
 </html>

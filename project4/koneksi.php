@@ -1,6 +1,6 @@
 <?php
 $servername = "localhost";
-$database = "db_jwdc";
+$database = "vsga";
 $username = "root";
 $password = "";
 // Create connection
